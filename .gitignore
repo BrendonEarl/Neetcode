@@ -1,0 +1,17 @@
+# PyCharm / IntelliJ settings
+.idea/
+*.iml
+
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables and secrets
+.env
