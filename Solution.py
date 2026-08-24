@@ -1,4 +1,4 @@
-from multiprocessing.connection import answer_challenge
+from collections import defaultdict
 from typing import List
 
 
@@ -38,7 +38,19 @@ class Solution:
                 return sorted([d[x], i])
             s.add(n)
 
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        #defaultdict() no error on accessing keys that don't exist
+        #use frequency array converted to tuple (tuple because it's immutable and can be used a a dict key) to hash
+        d = defaultdict(list)
 
-        
+        for s in strs:
+            freq = [0] * 26
+            for c in s:
+                freq[ord(c) - ord('a')] += 1
+            d[tuple(freq)].append(s)
+        return list(d.values())
 
-Solution().twoSum(nums = [3,4,5,6], target = 7)
+
+
+
+Solution().groupAnagrams(strs = ["act","pots","tops","cat","stop","hat"])
