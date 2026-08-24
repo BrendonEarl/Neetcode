@@ -50,7 +50,23 @@ class Solution:
             d[tuple(freq)].append(s)
         return list(d.values())
 
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        #works when answers are unique. Edge cases aren't solved
+        d = defaultdict(int)
+
+        for n in nums:
+            d[n] += 1
+
+        top = sorted(d.values())[::-1][:k]
+        answ = []
+        for v in d.keys():
+            if d[v] in top:
+                answ.append(v)
+        return answ
 
 
 
-Solution().groupAnagrams(strs = ["act","pots","tops","cat","stop","hat"])
+
+
+
+print(Solution().topKFrequent(nums = [1,1,1,1,1,1,2,7,7,7,5,5,5,55,55,55,5,5,55,5,55,5,5,2,2,3,3,3,3], k = 3))
