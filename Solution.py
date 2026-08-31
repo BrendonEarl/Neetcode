@@ -64,9 +64,30 @@ class Solution:
                 answ.append(v)
         return answ
 
+    def encode(self, strs: List[str]) -> str:
+        send = ''
+
+        for s in strs:
+            send += str(len(s))
+            send += '.'
+        send += '|'
+        for w in strs:
+            send += w
+        return send
+
+    def decode(self, s: str) -> List[str]:
+        send = []
+        sizes, stream = s.split('|', 1)
+        sizes = [int(x) for x in sizes.split('.')[:-1]]
+
+        point = 0
+        for size in sizes:
+            word = ''
+            for i in range(size):
+                word += stream[point]
+                point += 1
+            send.append(word)
+        return send
 
 
-
-
-
-print(Solution().topKFrequent(nums = [1,1,1,1,1,1,2,7,7,7,5,5,5,55,55,55,5,5,55,5,55,5,5,2,2,3,3,3,3], k = 3))
+print(Solution().decode(Solution().encode(strs = ["Hello","World"])))
