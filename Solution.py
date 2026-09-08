@@ -89,5 +89,36 @@ class Solution:
             send.append(word)
         return send
 
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        #use suffix and prefix. if there were no inverse to multiplication, this is the only way
+        x = len(nums)
+        l,r = [],[]
+        prd = 1
+        for n in nums:
+            prd *= n
+            l.append(prd)
+        prd = 1
+        for n in nums[::-1]:
+            r.append(prd)
+            prd *= n
+        r = r[::-1]
+        ans=[r[0]]
+        for i in range(1,x):
+            ans.append(l[i-1]*r[i])
+        return ans
+        # prd = 1
+        # cz = 0
+        # for n in nums:
+        #     if n==0:
+        #         cz += 1
+        #     else:
+        #         prd *= n
+        #
+        # if cz > 1:
+        #     return [0 for _ in nums]
+        # if cz == 1:
+        #     return [(prd if x==0 else 0) for x in nums]
+        # return [prd//y for y in nums]
 
-print(Solution().decode(Solution().encode(strs = ["Hello","World"])))
+Solution().productExceptSelf([-1,0,1,2,3])
+Solution().productExceptSelf([1,2,4,6])
