@@ -1,4 +1,5 @@
 from collections import defaultdict
+from math import floor
 from typing import List
 
 
@@ -120,5 +121,40 @@ class Solution:
         #     return [(prd if x==0 else 0) for x in nums]
         # return [prd//y for y in nums]
 
-Solution().productExceptSelf([-1,0,1,2,3])
-Solution().productExceptSelf([1,2,4,6])
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+
+        rows = [defaultdict(int) for _ in board]
+        cols = [defaultdict(int) for _ in board]
+        boxes = [defaultdict(int) for _ in board]
+
+        calc = lambda r,c : ((int(floor(r/3)) * 3) + (int(floor(c/3))))
+
+        for r, row in enumerate(board):
+            for c, val in enumerate(row):
+                if val != '.':
+                    rows[r][val] += 1
+                    cols[c][val] += 1
+                    boxes[calc(r,c)][val] += 1
+        return all([all(all(k<2 for k in j.values()) for j in l) for l in [rows,cols,boxes]])
+
+
+Solution().isValidSudoku(board =
+[["1","2",".",".","3",".",".",".","."],
+ ["4",".",".","5",".",".",".",".","."],
+ [".","9","8",".",".",".",".",".","3"],
+ ["5",".",".",".","6",".",".",".","4"],
+ [".",".",".","8",".","3",".",".","5"],
+ ["7",".",".",".","2",".",".",".","6"],
+ [".",".",".",".",".",".","2",".","."],
+ [".",".",".","4","1","9",".",".","8"],
+ [".",".",".",".","8",".",".","7","9"]])
+
+Solution().isValidSudoku([["1","2",".",".","3",".",".",".","."],
+ ["4",".",".","5",".",".",".",".","."],
+ [".","9","1",".",".",".",".",".","3"],
+ ["5",".",".",".","6",".",".",".","4"],
+ [".",".",".","8",".","3",".",".","5"],
+ ["7",".",".",".","2",".",".",".","6"],
+ [".",".",".",".",".",".","2",".","."],
+ [".",".",".","4","1","9",".",".","8"],
+ [".",".",".",".","8",".",".","7","9"]])
