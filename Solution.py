@@ -4,8 +4,8 @@ from typing import List
 
 
 class Solution:
-    # count occurances in list -> hash
     def hasDuplicate(self, nums: List[int]) ->bool:
+        # count occurances in list -> hash
         d = {}
         for n in nums:
             d[n] = 0
@@ -137,24 +137,21 @@ class Solution:
                     boxes[calc(r,c)][val] += 1
         return all([all(all(k<2 for k in j.values()) for j in l) for l in [rows,cols,boxes]])
 
+    def longestConsecutive(self, nums: List[int]) -> int:
+        nums = set(nums)
+        if nums is None: return 0
+        maxl = 1
+        for n in nums:
+            if n-1 not in nums:
+                l = 1
+                while n+1 in nums:
+                    l+=1
+                    maxl = max(l, maxl)
+                    n+=1
+                #use a set again for O(1) lookup.
+                #clever
+                # while (num + length) in numSet:
+                #     length += 1
+        return maxl
 
-Solution().isValidSudoku(board =
-[["1","2",".",".","3",".",".",".","."],
- ["4",".",".","5",".",".",".",".","."],
- [".","9","8",".",".",".",".",".","3"],
- ["5",".",".",".","6",".",".",".","4"],
- [".",".",".","8",".","3",".",".","5"],
- ["7",".",".",".","2",".",".",".","6"],
- [".",".",".",".",".",".","2",".","."],
- [".",".",".","4","1","9",".",".","8"],
- [".",".",".",".","8",".",".","7","9"]])
-
-Solution().isValidSudoku([["1","2",".",".","3",".",".",".","."],
- ["4",".",".","5",".",".",".",".","."],
- [".","9","1",".",".",".",".",".","3"],
- ["5",".",".",".","6",".",".",".","4"],
- [".",".",".","8",".","3",".",".","5"],
- ["7",".",".",".","2",".",".",".","6"],
- [".",".",".",".",".",".","2",".","."],
- [".",".",".","4","1","9",".",".","8"],
- [".",".",".",".","8",".",".","7","9"]])
+Solution().longestConsecutive(nums = [0,3,2,5,4,6,1,1])
