@@ -154,4 +154,19 @@ class Solution:
                 #     length += 1
         return maxl
 
-Solution().longestConsecutive(nums = [0,3,2,5,4,6,1,1])
+    def isPalindrome(self, s: str) -> bool:
+        s = ''.join(s.split()).lower()
+        l, r = 0, len(s) - 1
+        while l <= r:
+            while not s[l].isalnum() and l < len(s) - 1:
+                l += 1
+            while not s[r].isalnum() and r > 0:
+                r -= 1
+            if s[l] != s[r] and s[l].isalnum() and s[r].isalnum():
+                return False
+            l += 1
+            r -= 1
+
+        return True
+
+Solution().isPalindrome(s = "Was it a car or a cat I saw?")
