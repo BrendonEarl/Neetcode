@@ -169,4 +169,14 @@ class Solution:
 
         return True
 
-Solution().isPalindrome(s = "Was it a car or a cat I saw?")
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        #one indexed, return indices
+        l, r = 0, len(numbers) - 1
+        while (tst := (numbers[l] + numbers[r])) != target:
+            if tst < target:
+                l += 1
+            else:
+                r -= 1
+        return [l + 1, r + 1]
+
+Solution().twoSum([1,2,3,4], 3)
