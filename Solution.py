@@ -179,6 +179,7 @@ class Solution:
                 r -= 1
         return [l + 1, r + 1]
 
+    #todo optimize
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         s = defaultdict(int)
         i = 0
