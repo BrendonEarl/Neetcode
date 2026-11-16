@@ -179,4 +179,23 @@ class Solution:
                 r -= 1
         return [l + 1, r + 1]
 
-Solution().twoSum([1,2,3,4], 3)
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        s = defaultdict(int)
+        i = 0
+        for n in nums:
+            s[n] = i
+            i += 1
+        ans = set()
+        for j in range(len(nums)-1):
+            for k in range(j+1,len(nums)):
+                if (inv:= -(nums[j] + nums[k])) in s:
+                    if s[inv] and (s[inv] not in [j,k]):
+                        tmp = tuple(sorted([nums[s[inv]], nums[j], nums[k]]))
+                        if tmp not in ans:
+                            ans.add(tmp)
+        return list(ans)
+
+
+Solution().threeSum(nums = [-1,0,1,2,-1,-4])
+
+# Output: [[-1,-1,2],[-1,0,1]]
